@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# @File : xdspider.py
+# @File : artistspider.py
 
 import scrapy
 from xiudong.items import artistItem

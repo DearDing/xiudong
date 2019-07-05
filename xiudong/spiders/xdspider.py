@@ -15,15 +15,12 @@ class xdSpider(scrapy.Spider):
 
     def parse(self, response):
         self.get_artist_lists(response)
+        # 遍历所有详情页url
         # for artist_item in self.artist_page_list_temp:
         #     yield scrapy.Request(str(artist_item), callback=self.artist_parse)
+        # 单条数据测试
         yield scrapy.Request(str(self.artist_page_list_temp[1]), callback=self.artist_parse)
-
-    # 获取下一页音乐人列表
-    def get_next_page(self):
-        self.offset += 1
-        if self.offset <= 1198:
-            yield scrapy.Request(self.url + str(self.offset), callback=self.parse)
+        # self.get_next_page()
 
     # 解析音乐人详情页数据
     def artist_parse(self, response):
@@ -79,10 +76,18 @@ class xdSpider(scrapy.Spider):
         print(artistItem.music_works_list)
         yield artistItem
 
-    # 解析音乐人列表，获取详情页url
+    # 解析音乐人列表，获取音乐人详情页url
     def get_artist_lists(self, response):
+        self.artist_page_list_temp.clear()
         links = response.xpath('//div[@class="main auto-width"]//ul//li')
         for linkItem in links:
             link_href_item = linkItem.xpath('.//a[@class="g-name a-link"]/@href').extract()
             if len(link_href_item) > 0:
                 self.artist_page_list_temp.append(link_href_item[0])
+
+    # 获取下一页音乐人列表
+    def get_next_page(self):
+        self.offset += 1
+        if self.offset <= 1198:
+            yield scrapy.Request(self.url + str(self.offset), callback=self.parse)
+

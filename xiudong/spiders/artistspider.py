@@ -5,11 +5,14 @@ import scrapy
 from xiudong.items import artistItem
 
 
-class xdSpider(scrapy.Spider):
-    name = "xiudong"
+class artistSpider(scrapy.Spider):
+
+    name = "artist_spider"
     allowed_domains = ["www.showstart.com"]
+
     offset = 1
     url = "https://www.showstart.com/artist/list?pageNo="
+
     start_urls = [url + str(offset)]
     artist_page_list_temp = []
 

@@ -2,4 +2,5 @@
 # @File : runspider.py
 from scrapy import cmdline
 
-cmdline.execute(['scrapy', 'crawl', 'xiudong'])
+# cmdline.execute(['scrapy', 'crawl', 'artist_spider'])
+cmdline.execute(['scrapy', 'crawl', 'show_spider'])

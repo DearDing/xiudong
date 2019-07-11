@@ -7,15 +7,15 @@ import pymysql
 class MysqlHelper():
 
     config = {
-        "host": "127.0.0.1",
+        "host": "localhost",
         "port": 3306,
         "user": "root",
-        "password": "LBLB1212@@",
-        "database": "dbforpymysql"
+        "password": "123",
+        "database": "db_xiudong"
     }
 
-    def __init__(self, host=config.get("host"), port=config.get("port"), database=config.get("database"),
-                 user=config.get("user"), password=config.get("password"), charset='utf8'):
+    def __init__(self, host=config["host"], port=config["port"], database=config["database"],
+                 user=config["user"], password=config["password"], charset='utf8'):
         self.host = host
         self.port = port
         self.database = database
@@ -70,7 +70,6 @@ class MysqlHelper():
             self.connect()
             count = self.cursor.execute(sql, params)
             self.conn.commit()
-            self.close()
         except Exception as e:
             print(e.message)
         return count
